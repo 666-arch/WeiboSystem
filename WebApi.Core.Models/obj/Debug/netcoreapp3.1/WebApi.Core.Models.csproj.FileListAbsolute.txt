@@ -1,0 +1,10 @@
+F:\代码库\WeiBoSys\WebApi.Core.Models\bin\Debug\netcoreapp3.1\WebApi.Core.Models.deps.json
+F:\代码库\WeiBoSys\WebApi.Core.Models\bin\Debug\netcoreapp3.1\WebApi.Core.Models.dll
+F:\代码库\WeiBoSys\WebApi.Core.Models\obj\Debug\netcoreapp3.1\WebApi.Core.Models.AssemblyInfoInputs.cache
+F:\代码库\WeiBoSys\WebApi.Core.Models\obj\Debug\netcoreapp3.1\WebApi.Core.Models.AssemblyInfo.cs
+F:\代码库\WeiBoSys\WebApi.Core.Models\bin\Debug\netcoreapp3.1\WebApi.Core.Models.runtimeconfig.json
+F:\代码库\WeiBoSys\WebApi.Core.Models\bin\Debug\netcoreapp3.1\WebApi.Core.Models.runtimeconfig.dev.json
+F:\代码库\WeiBoSys\WebApi.Core.Models\obj\Debug\netcoreapp3.1\WebApi.Core.Models.genruntimeconfig.cache
+F:\代码库\WeiBoSys\WebApi.Core.Models\bin\Debug\netcoreapp3.1\WebApi.Core.Models.pdb
+F:\代码库\WeiBoSys\WebApi.Core.Models\obj\Debug\netcoreapp3.1\WebApi.Core.Models.dll
+F:\代码库\WeiBoSys\WebApi.Core.Models\obj\Debug\netcoreapp3.1\WebApi.Core.Models.pdb

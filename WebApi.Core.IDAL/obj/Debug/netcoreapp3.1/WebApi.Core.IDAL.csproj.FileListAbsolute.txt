@@ -1,0 +1,11 @@
+F:\代码库\WeiBoSys\WebApi.Core.IDAL\bin\Debug\netcoreapp3.1\WebApi.Core.IDAL.deps.json
+F:\代码库\WeiBoSys\WebApi.Core.IDAL\bin\Debug\netcoreapp3.1\WebApi.Core.IDAL.dll
+F:\代码库\WeiBoSys\WebApi.Core.IDAL\bin\Debug\netcoreapp3.1\WebApi.Core.IDAL.pdb
+F:\代码库\WeiBoSys\WebApi.Core.IDAL\bin\Debug\netcoreapp3.1\WebApi.Core.Models.dll
+F:\代码库\WeiBoSys\WebApi.Core.IDAL\bin\Debug\netcoreapp3.1\WebApi.Core.Models.pdb
+F:\代码库\WeiBoSys\WebApi.Core.IDAL\obj\Debug\netcoreapp3.1\WebApi.Core.IDAL.csprojAssemblyReference.cache
+F:\代码库\WeiBoSys\WebApi.Core.IDAL\obj\Debug\netcoreapp3.1\WebApi.Core.IDAL.AssemblyInfoInputs.cache
+F:\代码库\WeiBoSys\WebApi.Core.IDAL\obj\Debug\netcoreapp3.1\WebApi.Core.IDAL.AssemblyInfo.cs
+F:\代码库\WeiBoSys\WebApi.Core.IDAL\obj\Debug\netcoreapp3.1\WebApi.Core.IDAL.csproj.CopyComplete
+F:\代码库\WeiBoSys\WebApi.Core.IDAL\obj\Debug\netcoreapp3.1\WebApi.Core.IDAL.dll
+F:\代码库\WeiBoSys\WebApi.Core.IDAL\obj\Debug\netcoreapp3.1\WebApi.Core.IDAL.pdb

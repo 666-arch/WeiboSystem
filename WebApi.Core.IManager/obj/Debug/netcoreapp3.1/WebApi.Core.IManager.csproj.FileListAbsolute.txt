@@ -1,0 +1,15 @@
+F:\代码库\WeiBoSys\WebApi.Core.IManager\bin\Debug\netcoreapp3.1\WebApi.Core.IManager.deps.json
+F:\代码库\WeiBoSys\WebApi.Core.IManager\bin\Debug\netcoreapp3.1\WebApi.Core.IManager.dll
+F:\代码库\WeiBoSys\WebApi.Core.IManager\bin\Debug\netcoreapp3.1\WebApi.Core.IManager.pdb
+F:\代码库\WeiBoSys\WebApi.Core.IManager\obj\Debug\netcoreapp3.1\WebApi.Core.IManager.AssemblyInfoInputs.cache
+F:\代码库\WeiBoSys\WebApi.Core.IManager\obj\Debug\netcoreapp3.1\WebApi.Core.IManager.AssemblyInfo.cs
+F:\代码库\WeiBoSys\WebApi.Core.IManager\obj\Debug\netcoreapp3.1\WebApi.Core.IManager.dll
+F:\代码库\WeiBoSys\WebApi.Core.IManager\obj\Debug\netcoreapp3.1\WebApi.Core.IManager.pdb
+F:\代码库\WeiBoSys\WebApi.Core.IManager\bin\Debug\netcoreapp3.1\WebApi.Core.Dto.dll
+F:\代码库\WeiBoSys\WebApi.Core.IManager\bin\Debug\netcoreapp3.1\WebApi.Core.IDAL.dll
+F:\代码库\WeiBoSys\WebApi.Core.IManager\bin\Debug\netcoreapp3.1\WebApi.Core.Models.dll
+F:\代码库\WeiBoSys\WebApi.Core.IManager\bin\Debug\netcoreapp3.1\WebApi.Core.Dto.pdb
+F:\代码库\WeiBoSys\WebApi.Core.IManager\bin\Debug\netcoreapp3.1\WebApi.Core.IDAL.pdb
+F:\代码库\WeiBoSys\WebApi.Core.IManager\bin\Debug\netcoreapp3.1\WebApi.Core.Models.pdb
+F:\代码库\WeiBoSys\WebApi.Core.IManager\obj\Debug\netcoreapp3.1\WebApi.Core.IManager.csprojAssemblyReference.cache
+F:\代码库\WeiBoSys\WebApi.Core.IManager\obj\Debug\netcoreapp3.1\WebApi.Core.IManager.csproj.CopyComplete
