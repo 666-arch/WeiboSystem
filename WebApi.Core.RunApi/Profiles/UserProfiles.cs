@@ -9,6 +9,7 @@ namespace WebApi.Core.RunApi.Profiles
     {
         public UserProfiles()
         {
+            //源类型=>目标类型
             CreateMap<User, UserDto>()
                 .ForMember(target => target.GenderDisplay,
                     opt => opt

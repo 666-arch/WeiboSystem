@@ -13,8 +13,9 @@ namespace WebApi.Core.IManager
         Task<PageList<MicroBlogDto>> GetMicroBlogs(MicroBlogDtoParameters microBlogDtoParameters);
         Task<IEnumerable<MicroBlogDto>> GetMicroBlogForUser(Guid userId);
         Task RemoveMicroBlog(Guid microId);
-
         Task<MicroBlog> GetMicroForUser(Guid userId, Guid microId);
+
+        Task<bool> ExistsMicroBlog(Guid microId);
 
         //Task<MicroBlog> GetMicroBlogByMicroId(Guid microId);
     }

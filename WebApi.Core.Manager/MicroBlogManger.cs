@@ -130,5 +130,17 @@ namespace WebApi.Core.Manager
 
             return await _micro.GetAllAsync().FirstAsync(x => x.UserId == userId & x.Id == microId);
         }
+
+        public async Task<bool> ExistsMicroBlog(Guid microId)
+        {
+            if (microId==Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(microId));
+            }
+
+            return await _micro
+                .GetAllAsync()
+                .AnyAsync(x => x.Id == microId);
+        }
     }
 }

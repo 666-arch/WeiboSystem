@@ -64,13 +64,21 @@ namespace WebApi.Core.RunApi
             services.AddScoped<IPhotoAlbumService, PhotoAlbumService>();
             services.AddScoped<IPhotoAlbumManager, PhotoAlbumManager>();
 
-            var sqlConnection = Configuration.GetConnectionString("SqlServerConnection");
+            services.AddScoped<IMicroCommentsService, MicroCommentsService>();
+            services.AddScoped<IMicroCommentsManager, MicroCommentsManager>();
+
+            services.AddScoped<IReplyCommentsService, ReplyCommentsService>();
+            services.AddScoped<IReplyCommentsManager, ReplyCommentsManager>();
+
+            var sqlConnection = Configuration
+                .GetConnectionString("SqlServerConnection");
             services.AddDbContext<WeiBoDbContext>(options =>
             {
                 options.UseSqlServer(sqlConnection);
             });
             //×¢²á¿çÓò·ÃÎÊ·þÎñ
-            services.AddCors(option => option.AddPolicy("MicroCore", builder =>
+            services.AddCors(option => option
+                .AddPolicy("MicroCore", builder =>
             {
                 builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
             }));
