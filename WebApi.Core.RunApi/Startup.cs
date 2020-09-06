@@ -1,5 +1,8 @@
 using System;
+using System.IO;
+using System.Text;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -8,11 +11,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using StackExchange.Redis;
 using WebApi.Core.DAL;
 using WebApi.Core.IDAL;
 using WebApi.Core.IManager;
 using WebApi.Core.Manager;
 using WebApi.Core.Models;
+using WebApi.Core.RunApi.Helpers;
 
 namespace WebApi.Core.RunApi
 {
@@ -27,10 +33,55 @@ namespace WebApi.Core.RunApi
 
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddAuthentication(option =>
+            //    {
+            //        option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //        option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    })
+            //    .AddJwtBearer(options =>
+            //    {
+            //        options.TokenValidationParameters = new TokenValidationParameters
+            //        {
+            //            ValidateIssuer = true,  //是否验证Issuer
+            //            ValidateAudience = true,
+            //            ValidateLifetime = true,   //是否验证失效时间
+            //            ClockSkew = TimeSpan.FromMinutes(5),
+            //            ValidateIssuerSigningKey = true,
+            //            ValidAudience = "https://localhost:5001",
+            //            ValidIssuer = "https://localhost:5000",
+            //            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SecurityKey"))
+            //        };
+            //    });
+            services.AddAuthentication(options =>
+            {
+                //认证middleware配置
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).
+            AddJwtBearer(options =>
+            {
+                //主要是jwt  token参数设置
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    //颁发者
+                    ValidateIssuer = true,
+                    ValidIssuer = Configuration["JwtSetting:Issuer"],
+                    //被授权者
+                    ValidateAudience = true,
+                    ValidAudience = Configuration["JwtSetting:Audience"],
+                    //秘钥
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtSetting:SecretKey"])),
+                    //是否验证失效时间【使用当前时间与Token的Claims中的NotBefore和Expires对比】
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.FromMinutes(5)//允许的服务器时间偏移量【5分钟】
+                };
+            });
+
             services.AddControllers(setup =>
             {
                 setup.ReturnHttpNotAcceptable = true;
-            }).AddXmlDataContractSerializerFormatters() //允许存在 xml 数据格式请求，默认 Json
+            }).AddNewtonsoftJson().AddXmlDataContractSerializerFormatters() //允许存在 xml 数据格式请求，默认 Json
                 .ConfigureApiBehaviorOptions(setup =>
                 {
                     setup.InvalidModelStateResponseFactory = context =>
@@ -46,7 +97,7 @@ namespace WebApi.Core.RunApi
                         problemDetails.Extensions.Add("traceId", context.HttpContext.TraceIdentifier);
                         return new UnprocessableEntityObjectResult(problemDetails)
                         {
-                            ContentTypes = {"application/problem+json"}
+                            ContentTypes = { "application/problem+json" }
                         };
                     };
                 });
@@ -70,6 +121,10 @@ namespace WebApi.Core.RunApi
             services.AddScoped<IReplyCommentsService, ReplyCommentsService>();
             services.AddScoped<IReplyCommentsManager, ReplyCommentsManager>();
 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            services.AddTransient<JWTHelper>();
+
             var sqlConnection = Configuration
                 .GetConnectionString("SqlServerConnection");
             services.AddDbContext<WeiBoDbContext>(options =>
@@ -82,6 +137,8 @@ namespace WebApi.Core.RunApi
             {
                 builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
             }));
+            services.AddSingleton<IConnectionMultiplexer>
+                (ConnectionMultiplexer.Connect("localhost"));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -106,9 +163,13 @@ namespace WebApi.Core.RunApi
 
             app.UseRouting();
 
-            app.UseAuthorization();
-            
+
             app.UseCors("MicroCore");
+
+            app.UseAuthentication(); //认证中间件
+
+            app.UseAuthorization(); //授权中间件
+
 
             app.UseEndpoints(endpoints =>
             {

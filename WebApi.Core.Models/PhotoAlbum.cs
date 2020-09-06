@@ -11,7 +11,7 @@ namespace WebApi.Core.Models
     {
         [Required,Column(TypeName = "varchar(40)")]
         public string PhotoAlbumName { get; set; }  //相册名称
-        public bool PhotoPermissions { get; set; }  //相册权限 
+        public bool PhotoPermissions { get; set; } //相册权限 
         [ForeignKey(nameof(User))]
         public Guid? UserId { get; set; }
         public User User { get; set; }

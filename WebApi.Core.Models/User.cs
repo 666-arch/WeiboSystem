@@ -23,7 +23,5 @@ namespace WebApi.Core.Models
         [ Column(TypeName = "varchar(300)")]
         public string ImagePath { get; set; }   //个人头像
         public DateTime DateOfBirth { get; set; }   //出生日期
-
-
     }
 }

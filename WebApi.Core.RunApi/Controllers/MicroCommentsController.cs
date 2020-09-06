@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using StackExchange.Redis;
 using WebApi.Core.Dto;
 using WebApi.Core.IManager;
 using WebApi.Core.Models;
@@ -16,14 +17,22 @@ namespace WebApi.Core.RunApi.Controllers
         private readonly IMicroCommentsManager _microComments;
         private readonly IMicroBlogManger _microBlog;
         private readonly IMapper _mapper;
-        public MicroCommentsController(IMicroCommentsManager microComments,IMicroBlogManger microBlog,IMapper mapper)
+        private readonly IConnectionMultiplexer _redis;
+        private readonly IDatabase _db;
+        public MicroCommentsController(
+            IMicroCommentsManager microComments,
+            IMicroBlogManger microBlog,
+            IMapper mapper,
+            IConnectionMultiplexer redis)
         {
             _microComments = microComments ?? 
                              throw new ArgumentNullException(nameof(microComments));
             _microBlog = microBlog ??
                          throw new ArgumentNullException(nameof(microBlog)); 
             _mapper = mapper ??
-                      throw new ArgumentNullException(nameof(mapper)); 
+                      throw new ArgumentNullException(nameof(mapper));
+            _redis = redis;
+            _db = _redis.GetDatabase();
         }
         [HttpGet("{microId}",
             Name = nameof(GetComments))]
@@ -35,6 +44,7 @@ namespace WebApi.Core.RunApi.Controllers
                 return NotFound();
             }
             var CommentEntity= await _microComments.GetMicroCommentsForMicroBlog(microId);
+
             if (CommentEntity==null)
             {
                 return NotFound();
@@ -67,7 +77,6 @@ namespace WebApi.Core.RunApi.Controllers
             await _microComments.DeleteMicroCommentForUser(commentId);
             return NoContent();
         }
-
 
     }
 }

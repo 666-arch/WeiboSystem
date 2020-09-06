@@ -1,10 +1,14 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using StackExchange.Redis;
 using WebApi.Core.Dto;
 using WebApi.Core.IManager;
 using WebApi.Core.Models;
@@ -19,8 +23,19 @@ namespace WebApi.Core.RunApi.Controllers
         private readonly IUserManager _user;
         private readonly IMicroBlogManger _micro;
         private readonly IMapper _mapper;
+        private readonly IConnectionMultiplexer _redis;
+        private readonly IHttpContextAccessor _accessor;
+        private readonly IFormCollection _formCollection;
 
-        public MicroBlogController(IUserManager user,IMicroBlogManger micro,IMapper mapper)
+        private readonly IDatabase _db;
+        private readonly string keyCounts = "LikeCounts";
+
+        public MicroBlogController(IUserManager user,
+            IMicroBlogManger micro,
+            IMapper mapper, 
+            IConnectionMultiplexer redis,
+            IHttpContextAccessor accessor
+            )
         {
             _user = user ?? 
                     throw new ArgumentNullException(nameof(user));
@@ -28,6 +43,11 @@ namespace WebApi.Core.RunApi.Controllers
                      throw new ArgumentNullException(nameof(micro));
             _mapper = mapper ?? 
                       throw new ArgumentNullException(nameof(mapper));
+
+            _redis = redis;
+            _accessor = accessor;
+            _db = _redis.GetDatabase(6);
+
         }
 
         [HttpGet("{userId}",Name = nameof(GetMicroBlog))]
@@ -39,6 +59,7 @@ namespace WebApi.Core.RunApi.Controllers
                 return NotFound();
             }
             var microBlogEntity =await _micro.GetMicroBlogForUser(userId);
+
             if (microBlogEntity==null)
             {
                 return NotFound();
@@ -154,6 +175,73 @@ namespace WebApi.Core.RunApi.Controllers
                         searchQuery = parameters.SearchQuery
                     });
             }
+        }
+        [HttpGet("{microId}")]
+        public async Task<IActionResult>
+            StatisticalLikeCount(Guid microId,int count=0)  //单独定义点赞接口
+        {
+            if (!await _micro.ExistsMicroBlog(microId))
+            {
+                return NotFound();
+            }
+
+            if (await _db.
+                KeyExistsAsync
+                    (keyCounts+_accessor.HttpContext.Connection.RemoteIpAddress.ToString()+count)==false)
+            {
+                await _db.StringIncrementAsync(keyCounts + count, 1);
+
+                await _db.StringSetAsync(
+                    keyCounts + _accessor.HttpContext.Connection.RemoteIpAddress.ToString() + count,"true");
+               
+                string totals = await _db.StringGetAsync(keyCounts + count);
+                TotalLikeCountMicroBlogModel likes = new TotalLikeCountMicroBlogModel
+                {
+                    LikeCount = Convert.ToInt32(totals)
+                };
+                await _micro.EditMicroBlogLikeCounts(microId, likes.LikeCount);
+                return Ok(likes);
+            }
+            //读取
+            string total = await _db.StringGetAsync(keyCounts + count);
+            TotalLikeCountMicroBlogModel like=new TotalLikeCountMicroBlogModel
+            {
+                LikeCount = Convert.ToInt32(total)
+
+            };
+            await _micro.EditMicroBlogLikeCounts(microId, like.LikeCount);
+            return Ok(like);
+        }
+
+        [HttpPost]
+        public async Task<string> 
+            PostFile([FromForm]IFormCollection collection)
+        {
+            string result = "Fail";
+            if (collection.ContainsKey("path"))
+            {
+                var path = collection["path"];
+            }
+
+            FormFileCollection fileCollection = (FormFileCollection) collection.Files;
+            foreach (IFormFile file in fileCollection)
+            {
+                StreamReader reader=new StreamReader(file.OpenReadStream());
+                string content = await reader.ReadToEndAsync();
+                string name = file.FileName;
+                string filename = @"F:/File/" + name;
+                if (System.IO.File.Exists(filename))
+                {
+                    System.IO.File.Delete(filename);
+                }
+                await using (FileStream fs= System.IO.File.Create(filename))
+                {
+                    await file.CopyToAsync(fs);
+                    await fs.FlushAsync();
+                }
+                result = "成功!";
+            }
+            return result;
         }
     }
 }

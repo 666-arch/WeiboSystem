@@ -5,3 +5,4 @@ F:\代码库\WeiBoSys\WebApi.Core.Dto\obj\Debug\netstandard2.0\WebApi.Core.Dto.A
 F:\代码库\WeiBoSys\WebApi.Core.Dto\obj\Debug\netstandard2.0\WebApi.Core.Dto.AssemblyInfo.cs
 F:\代码库\WeiBoSys\WebApi.Core.Dto\obj\Debug\netstandard2.0\WebApi.Core.Dto.dll
 F:\代码库\WeiBoSys\WebApi.Core.Dto\obj\Debug\netstandard2.0\WebApi.Core.Dto.pdb
+F:\代码库\WeiBoSys\WebApi.Core.Dto\obj\Debug\netstandard2.0\WebApi.Core.Dto.csprojAssemblyReference.cache

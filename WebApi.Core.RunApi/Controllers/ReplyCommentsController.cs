@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using StackExchange.Redis;
 using WebApi.Core.Dto;
 using WebApi.Core.IManager;
 using WebApi.Core.Models;
@@ -17,8 +18,11 @@ namespace WebApi.Core.RunApi.Controllers
         private readonly IMicroCommentsManager _comment;
         private readonly IMicroBlogManger _micro;
         private readonly IMapper _mapper;
-
-        public ReplyCommentsController(IReplyCommentsManager reply,IMicroCommentsManager comment,IMicroBlogManger micro,IMapper mapper)
+        
+        public ReplyCommentsController(IReplyCommentsManager reply,
+            IMicroCommentsManager comment,
+            IMicroBlogManger micro,
+            IMapper mapper)
         {
             _reply = reply ?? 
                      throw new ArgumentNullException(nameof(reply));

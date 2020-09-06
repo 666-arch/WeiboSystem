@@ -10,8 +10,8 @@ using WebApi.Core.Models;
 namespace WebApi.Core.Models.Migrations
 {
     [DbContext(typeof(WeiBoDbContext))]
-    [Migration("20200824011958_ChangeGender")]
-    partial class ChangeGender
+    [Migration("20200828141243_WeiBo")]
+    partial class WeiBo
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,6 +36,15 @@ namespace WebApi.Core.Models.Migrations
                     b.Property<string>("MicroContent")
                         .IsRequired()
                         .HasColumnType("ntext");
+
+                    b.Property<string>("MicroImagePath")
+                        .HasColumnType("varchar(800)");
+
+                    b.Property<int>("MicroLikeCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MicroVideo")
+                        .HasColumnType("varchar(1000)");
 
                     b.Property<Guid?>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -334,8 +343,8 @@ namespace WebApi.Core.Models.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("02013f01-0b77-4d92-989e-e2cadd1d2f66"),
-                            CreateTime = new DateTime(2020, 8, 24, 9, 19, 58, 14, DateTimeKind.Local).AddTicks(1374),
+                            Id = new Guid("65b5f9e6-2f89-4dfc-a27c-caf23afd2db4"),
+                            CreateTime = new DateTime(2020, 8, 28, 22, 12, 43, 110, DateTimeKind.Local).AddTicks(6315),
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "1437855583@qq.com",
                             Gender = 1,
@@ -348,8 +357,8 @@ namespace WebApi.Core.Models.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c5cb8748-4da9-4e18-8cc0-9e181f6fe598"),
-                            CreateTime = new DateTime(2020, 8, 24, 9, 19, 58, 16, DateTimeKind.Local).AddTicks(1375),
+                            Id = new Guid("7bcf89e5-cef9-4f2f-b897-dff4b39891d7"),
+                            CreateTime = new DateTime(2020, 8, 28, 22, 12, 43, 111, DateTimeKind.Local).AddTicks(6316),
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "25161531@qq.com",
                             Gender = 2,
@@ -362,8 +371,8 @@ namespace WebApi.Core.Models.Migrations
                         },
                         new
                         {
-                            Id = new Guid("fab990a7-a72b-492e-9924-8c9c347b1d54"),
-                            CreateTime = new DateTime(2020, 8, 24, 9, 19, 58, 16, DateTimeKind.Local).AddTicks(1375),
+                            Id = new Guid("dcc33546-3e6c-400d-9061-d6e7c8150414"),
+                            CreateTime = new DateTime(2020, 8, 28, 22, 12, 43, 111, DateTimeKind.Local).AddTicks(6316),
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "156431515@qq.com",
                             Gender = 1,

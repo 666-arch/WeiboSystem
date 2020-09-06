@@ -38,6 +38,9 @@ namespace WebApi.Core.Models.Migrations
                     b.Property<string>("MicroImagePath")
                         .HasColumnType("varchar(800)");
 
+                    b.Property<int>("MicroLikeCount")
+                        .HasColumnType("int");
+
                     b.Property<string>("MicroVideo")
                         .HasColumnType("varchar(1000)");
 
@@ -155,8 +158,8 @@ namespace WebApi.Core.Models.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(40)");
 
-                    b.Property<bool>("PhotoPermissions")
-                        .HasColumnType("bit");
+                    b.Property<int>("PhotoPermissions")
+                        .HasColumnType("int");
 
                     b.Property<Guid?>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -338,8 +341,8 @@ namespace WebApi.Core.Models.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("37480aee-1338-46e0-8fa0-31f4893a8ee8"),
-                            CreateTime = new DateTime(2020, 8, 27, 9, 19, 8, 126, DateTimeKind.Local).AddTicks(2149),
+                            Id = new Guid("19ec6653-0ec0-40b1-bac8-0a2096d5e066"),
+                            CreateTime = new DateTime(2020, 9, 4, 15, 10, 5, 294, DateTimeKind.Local).AddTicks(2985),
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "1437855583@qq.com",
                             Gender = 1,
@@ -352,8 +355,8 @@ namespace WebApi.Core.Models.Migrations
                         },
                         new
                         {
-                            Id = new Guid("310c70e0-b89f-4874-8e37-06e999b746a8"),
-                            CreateTime = new DateTime(2020, 8, 27, 9, 19, 8, 128, DateTimeKind.Local).AddTicks(2150),
+                            Id = new Guid("943aa9cc-5b7e-4eea-ad39-1b2aee025a2f"),
+                            CreateTime = new DateTime(2020, 9, 4, 15, 10, 5, 295, DateTimeKind.Local).AddTicks(2986),
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "25161531@qq.com",
                             Gender = 2,
@@ -366,8 +369,8 @@ namespace WebApi.Core.Models.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e091baf4-a9ca-4042-8940-c5b664548817"),
-                            CreateTime = new DateTime(2020, 8, 27, 9, 19, 8, 128, DateTimeKind.Local).AddTicks(2150),
+                            Id = new Guid("3e80c68b-4c6e-4f37-82c4-093ae2feca67"),
+                            CreateTime = new DateTime(2020, 9, 4, 15, 10, 5, 295, DateTimeKind.Local).AddTicks(2986),
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "156431515@qq.com",
                             Gender = 1,

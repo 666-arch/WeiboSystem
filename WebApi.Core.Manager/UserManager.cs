@@ -39,7 +39,8 @@ namespace WebApi.Core.Manager
 
         public async Task<bool> Login(string email, string password)
         {
-            return await _userService.GetAllAsync().AnyAsync(x => x.Email == email && x.Password == password);
+            return await _userService.GetAllAsync()
+                .AnyAsync(x => x.Email == email && x.Password == password);
         }
         public async Task EditUser(string email, string username, string realname, string imagepath)
         {

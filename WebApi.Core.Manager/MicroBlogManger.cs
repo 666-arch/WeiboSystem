@@ -36,21 +36,6 @@ namespace WebApi.Core.Manager
             {
                 throw new ArgumentNullException(nameof(microBlogDtoParameters));
             }
-            //if (string.IsNullOrWhiteSpace(microBlogDtoParameters.MicroContent)&&
-            //    string.IsNullOrWhiteSpace(microBlogDtoParameters.SearchQuery))
-            //{
-            //    return await _micro.GetAllAsync().Select(m => new MicroBlogDto()
-            //    {
-            //        UserName = m.User.UserName,
-            //        MicroContent = m.MicroContent,
-            //        UserId = m.UserId,
-            //        MicroVideo = m.MicroVideo,
-            //        MicroImagePath = m.MicroImagePath,
-            //        CreateTime = m.CreateTime
-            //    }).OrderByDescending(m=>m.CreateTime) 
-            //        .ToListAsync();
-            //}
-
             var queryMicroItem = _micro.GetAllAsync()
                 .Select(m=>new MicroBlogDto()
                 {
@@ -77,13 +62,6 @@ namespace WebApi.Core.Manager
                     x.MicroContent.Contains(microBlogDtoParameters.SearchQuery))
                     .OrderByDescending(m => m.CreateTime);
             }
-
-            //分页逻辑
-            //queryMicroItem = queryMicroItem
-            //    .Skip(microBlogDtoParameters.PageSize * 
-            //          (microBlogDtoParameters.PageNumber - 1))
-            //    .Take(microBlogDtoParameters.PageSize);
-
             return await PageList<MicroBlogDto>
                 .CreateAsync(queryMicroItem, microBlogDtoParameters.PageNumber, microBlogDtoParameters.PageSize);
         }
@@ -141,6 +119,18 @@ namespace WebApi.Core.Manager
             return await _micro
                 .GetAllAsync()
                 .AnyAsync(x => x.Id == microId);
+        }
+
+        public async Task EditMicroBlogLikeCounts(Guid microId, int LikeCounts)
+        {
+            if (microId==Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(microId));
+            }
+
+            var micro=await _micro.GetAllAsync().FirstAsync(x => x.Id == microId);
+            micro.MicroLikeCount = LikeCounts;
+            await _micro.EditAsync(micro);
         }
     }
 }

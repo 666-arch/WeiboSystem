@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebApi.Core.Models.Migrations
 {
-    public partial class InitWeiBoSysDb : Migration
+    public partial class WeiBo : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -36,7 +36,10 @@ namespace WebApi.Core.Models.Migrations
                     CreateTime = table.Column<DateTime>(nullable: false),
                     IsRemoved = table.Column<bool>(nullable: false),
                     UserId = table.Column<Guid>(nullable: true),
-                    MicroContent = table.Column<string>(type: "ntext", nullable: false)
+                    MicroContent = table.Column<string>(type: "ntext", nullable: false),
+                    MicroImagePath = table.Column<string>(type: "varchar(800)", nullable: true),
+                    MicroVideo = table.Column<string>(type: "varchar(1000)", nullable: true),
+                    MicroLikeCount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -270,17 +273,17 @@ namespace WebApi.Core.Models.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "CreateTime", "DateOfBirth", "Email", "Gender", "ImagePath", "IsRemoved", "Password", "PersonalElucidation", "RealName", "UserName" },
-                values: new object[] { new Guid("02d42325-6bc9-4903-a427-88446dbf0193"), new DateTime(2020, 8, 23, 12, 54, 13, 380, DateTimeKind.Local).AddTicks(51), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "1437855583@qq.com", 1, "default.png", false, "123456", "暂无", "王五", "Jack" });
+                values: new object[] { new Guid("65b5f9e6-2f89-4dfc-a27c-caf23afd2db4"), new DateTime(2020, 8, 28, 22, 12, 43, 110, DateTimeKind.Local).AddTicks(6315), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "1437855583@qq.com", 1, "default.png", false, "123456", "暂无", "王五", "Jack" });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "CreateTime", "DateOfBirth", "Email", "Gender", "ImagePath", "IsRemoved", "Password", "PersonalElucidation", "RealName", "UserName" },
-                values: new object[] { new Guid("d0e33796-8c88-4b11-a6cd-4026084427fa"), new DateTime(2020, 8, 23, 12, 54, 13, 381, DateTimeKind.Local).AddTicks(52), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "25161531@qq.com", 2, "default.png", false, "123456", "暂无", "张三", "Bob" });
+                values: new object[] { new Guid("7bcf89e5-cef9-4f2f-b897-dff4b39891d7"), new DateTime(2020, 8, 28, 22, 12, 43, 111, DateTimeKind.Local).AddTicks(6316), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "25161531@qq.com", 2, "default.png", false, "123456", "暂无", "张三", "Bob" });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "CreateTime", "DateOfBirth", "Email", "Gender", "ImagePath", "IsRemoved", "Password", "PersonalElucidation", "RealName", "UserName" },
-                values: new object[] { new Guid("819232fa-a199-42d5-bf2f-c9b1d56a1b47"), new DateTime(2020, 8, 23, 12, 54, 13, 382, DateTimeKind.Local).AddTicks(52), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "156431515@qq.com", 1, "default.png", false, "123456", "暂无", "李四", "Mike" });
+                values: new object[] { new Guid("dcc33546-3e6c-400d-9061-d6e7c8150414"), new DateTime(2020, 8, 28, 22, 12, 43, 111, DateTimeKind.Local).AddTicks(6316), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "156431515@qq.com", 1, "default.png", false, "123456", "暂无", "李四", "Mike" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_MicroBlogs_UserId",

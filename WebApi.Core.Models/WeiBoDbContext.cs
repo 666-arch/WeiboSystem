@@ -6,13 +6,13 @@ namespace WebApi.Core.Models
     public class WeiBoDbContext:DbContext
     {
         public WeiBoDbContext(DbContextOptions<WeiBoDbContext> options)
-            :base(options)
+            : base(options)
         {
-            
+
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=WeiBoSysDb;Integrated Security=True");
+            optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=WeiBoSystemDb;Integrated Security=True");
         }
 
         public DbSet<User> Users { get; set; }
@@ -22,17 +22,15 @@ namespace WebApi.Core.Models
         public DbSet<PhotoCollection> PhotoCollections { get; set; }
         public DbSet<PhotoAlbum> PhotoAlbums { get; set; }
         public DbSet<MicroLike> MicroLikes { get; set; }
-
         public DbSet<MicroComments> MicroCommentses { get; set; }
         public DbSet<MicroFans> MicroFanses { get; set; }
         public DbSet<MicroBlog> MicroBlogs { get; set; }
 
-        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<MicroComments>()
                 .HasOne(x => x.User);
-            
+
             modelBuilder.Entity<User>().HasData(
                 new User
                 {
@@ -66,4 +64,5 @@ namespace WebApi.Core.Models
                 });
         }
     }
+
 }

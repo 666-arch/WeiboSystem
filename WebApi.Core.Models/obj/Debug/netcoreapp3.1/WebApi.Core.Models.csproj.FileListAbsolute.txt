@@ -8,3 +8,4 @@ F:\代码库\WeiBoSys\WebApi.Core.Models\obj\Debug\netcoreapp3.1\WebApi.Core.Mod
 F:\代码库\WeiBoSys\WebApi.Core.Models\bin\Debug\netcoreapp3.1\WebApi.Core.Models.pdb
 F:\代码库\WeiBoSys\WebApi.Core.Models\obj\Debug\netcoreapp3.1\WebApi.Core.Models.dll
 F:\代码库\WeiBoSys\WebApi.Core.Models\obj\Debug\netcoreapp3.1\WebApi.Core.Models.pdb
+F:\代码库\WeiBoSys\WebApi.Core.Models\obj\Debug\netcoreapp3.1\WebApi.Core.Models.csprojAssemblyReference.cache

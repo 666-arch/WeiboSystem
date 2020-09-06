@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Numerics;
 
 namespace WebApi.Core.Models
 {
@@ -18,5 +19,9 @@ namespace WebApi.Core.Models
         public string MicroImagePath { get; set; }
         [Column(TypeName = "varchar(1000)")]
         public string MicroVideo { get; set; }
+
+        [Column(TypeName = "int")]
+        public int MicroLikeCount { get; set; }    //总点赞数
+
     }
 }
